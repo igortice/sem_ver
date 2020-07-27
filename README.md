@@ -1,8 +1,10 @@
 # SemVer
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/sem_ver`. To experiment with that code, run `bin/console` for an interactive prompt.
+The gem creates a yml file in the public folder in which it can be filled and consumed, at any time, to generate information based on the concept of semantic versioning.
 
-TODO: Delete this and the text above, and describe your gem
+The concept of the gem is very simple, whenever you need to add a version based on semantic versioning just use the gem methods, your version will be saved in the file and for information like current version, version listing, just use other methods of gem.
+
+Why use a file instead of the database, the answer is simple, if you work with various environments such as approval and production you must have banks for each version and as the concept here is to always have the same versions for both environments, so the use of the file makes this possible since you can commit the file in devel, for example, and share in all environments through the merge of the vcs.
 
 ## Installation
 
