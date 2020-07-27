@@ -106,6 +106,9 @@ Metrics/AbcSize:
 Metrics/ParameterLists:
   Enabled: false
 
+Metrics/CyclomaticComplexity:
+  Max: 10
+
 RSpec/FilePath:
   Exclude:
     - spec/rubocop/formatter/junit_formatter_spec.rb
