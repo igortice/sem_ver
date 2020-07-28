@@ -18,8 +18,8 @@ module SemVer
       @name_file       = name_file
       @folder_file     = folder_file
       @file            = name_file + '.yml'
-      @path_to_file    = Rails.root.join(folder_file, @file)
-      # @touched_file    = self.touched_file
+      @path_to_file    = File.join(Dir.pwd, folder_file, @file)
+      @touched_file    = touched_file
     end
 
     def clear_data
@@ -53,7 +53,8 @@ module SemVer
         raise 'name_file is not String with value' if !name_file.is_a?(String) || name_file.strip.blank?
       end
 
-      raise "folder_file #{folder_file} is not exists in directory" if !(Dir.children(File.join(Dir.pwd)).include?(folder_file))
+      raise "folder_file #{folder_file} is not exists in directory" unless
+        Dir.children(File.join(Dir.pwd)).include?(folder_file)
     end
 
     def touched_file

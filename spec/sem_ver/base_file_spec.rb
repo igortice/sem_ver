@@ -1,17 +1,30 @@
 # frozen_string_literal: true
 
 RSpec.describe SemVer::BaseFile do
-  describe 'BaseFile check constant variables' do
-    it 'const DEFAULT_INITIAL_VERSION = [1, 0, 0]' do
-      expect(described_class::DEFAULT_INITIAL_VERSION).to eq([1, 0, 0])
+  subject(:base_file) { described_class.new }
+
+  let(:hash_base_initial) do
+    {
+      initial_version: [1, 0, 0],
+      name_file:       'semver',
+      folder_file:     'public',
+      file:            'semver.yml',
+      path_to_file:    File.join(Dir.pwd, 'public', 'semver.yml'),
+      touched_file:    true
+    }
+  end
+
+  describe 'BaseFile default constant' do
+    it 'DEFAULT_INITIAL_VERSION = [1, 0, 0]' do
+      expect(described_class::DEFAULT_INITIAL_VERSION).to eq(hash_base_initial[:initial_version])
     end
 
-    it 'const DEFAULT_NAME_FILE = "semver"' do
-      expect(described_class::DEFAULT_NAME_FILE).to eq('semver')
+    it 'DEFAULT_NAME_FILE = "semver"' do
+      expect(described_class::DEFAULT_NAME_FILE).to eq(hash_base_initial[:name_file])
     end
 
-    it 'const DEFAULT_FOLDER_FILE = "public"' do
-      expect(described_class::DEFAULT_FOLDER_FILE).to eq('public')
+    it 'DEFAULT_FOLDER_FILE = "public"' do
+      expect(described_class::DEFAULT_FOLDER_FILE).to eq(hash_base_initial[:folder_file])
     end
   end
 
@@ -61,6 +74,32 @@ RSpec.describe SemVer::BaseFile do
         expect { described_class.new(folder_file: name_folder) }
           .to raise_error("folder_file #{name_folder} is not exists in directory")
       end
+    end
+  end
+
+  describe 'BaseFile.new default instance variable' do
+    it '@initial_version=[1, 0, 0]' do
+      expect(base_file.instance_variable_get(:@initial_version)).to eq(hash_base_initial[:initial_version])
+    end
+
+    it '@name_file="semver"' do
+      expect(base_file.instance_variable_get(:@name_file)).to eq(hash_base_initial[:name_file])
+    end
+
+    it '@folder_file="public"' do
+      expect(base_file.instance_variable_get(:@folder_file)).to eq(hash_base_initial[:folder_file])
+    end
+
+    it '@file="semver.yml"' do
+      expect(base_file.instance_variable_get(:@file)).to eq(hash_base_initial[:file])
+    end
+
+    it "@path_to_file='#{File.join(Dir.pwd, 'public', 'semver.yml')}'" do
+      expect(base_file.instance_variable_get(:@path_to_file)).to eq(hash_base_initial[:path_to_file])
+    end
+
+    it '@touched_file=true' do
+      expect(base_file.instance_variable_get(:@touched_file)).to eq(hash_base_initial[:touched_file])
     end
   end
 end

@@ -101,13 +101,16 @@ Metrics/MethodLength:
   Max: 20
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 30
 
 Metrics/ParameterLists:
   Enabled: false
 
 Metrics/CyclomaticComplexity:
-  Max: 10
+  Max: 15
+
+Metrics/PerceivedComplexity:
+  Max: 15
 
 RSpec/FilePath:
   Exclude:
