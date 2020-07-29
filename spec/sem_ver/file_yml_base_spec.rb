@@ -14,7 +14,7 @@ RSpec.describe SemVer::FileYmlBase do
     }
   end
 
-  describe 'BaseFile default constant' do
+  describe 'Default constants' do
     it 'DEFAULT_INITIAL_VERSION = [1, 0, 0]' do
       expect(described_class::DEFAULT_INITIAL_VERSION).to eq(hash_base_initial[:initial_version])
     end
@@ -28,7 +28,7 @@ RSpec.describe SemVer::FileYmlBase do
     end
   end
 
-  describe 'BaseFile check params construct' do
+  describe 'Check params construct' do
     context 'when initial_version passed' do
       it 'raise if nil' do
         expect { described_class.new(initial_version: nil) }
@@ -77,7 +77,7 @@ RSpec.describe SemVer::FileYmlBase do
     end
   end
 
-  describe 'BaseFile.new default instance variable' do
+  describe 'Default instance variable' do
     it '@initial_version=[1, 0, 0]' do
       expect(base_file.instance_variable_get(:@initial_version)).to eq(hash_base_initial[:initial_version])
     end
@@ -103,7 +103,7 @@ RSpec.describe SemVer::FileYmlBase do
     end
   end
 
-  describe 'BaseFile protected methods' do
+  describe 'Protected methods' do
     context 'when load_file_to_array_of_hash used' do
       it 'return Array' do
         expect(base_file.send(:load_file_to_array_of_hash).is_a?(Array)).to be(true)

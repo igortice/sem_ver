@@ -2,9 +2,10 @@
 
 RSpec.describe SemVer::FileYml do
   subject(:file_yml) { described_class.new }
+
   let(:default_desc) { 'this is a test' }
 
-  describe 'FileYml methods' do
+  describe 'Check methods' do
     context 'when load_versions used' do
       it 'return Array' do
         expect(file_yml.load_versions.is_a?(Array)).to be(true)
@@ -96,7 +97,7 @@ RSpec.describe SemVer::FileYml do
     end
   end
 
-  describe 'FileYml check order versions number is correct' do
+  describe 'Check order versions number is correct' do
     it '1) clear_version' do
       expect(file_yml.clear_versions).to be(true)
     end
