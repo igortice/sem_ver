@@ -11,6 +11,10 @@ module SemVer
       data ? (data.map { |item| Version.new(item['number'], item['date'], item['desc']) }) : []
     end
 
+    def clear_versions
+      clear_data
+    end
+
     def first_version(count = 1)
       data = load_versions.last(count.abs)
 
@@ -47,7 +51,7 @@ module SemVer
 
       version =
         if current_version.present?
-          version_array = current_version.number.split('.')
+          version_array = current_version.number.split('.').map(&:to_i)
           case type
           when :major
             [version_array[0].next, 0, 0]
@@ -59,7 +63,6 @@ module SemVer
         else
           @initial_version
         end
-
       add_version_to_file(version, desc)
     end
 
