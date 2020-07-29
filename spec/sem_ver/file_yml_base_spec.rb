@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe SemVer::BaseFile do
+RSpec.describe SemVer::FileYmlBase do
   subject(:base_file) { described_class.new }
 
   let(:hash_base_initial) do
@@ -100,6 +100,54 @@ RSpec.describe SemVer::BaseFile do
 
     it '@touched_file=true' do
       expect(base_file.instance_variable_get(:@touched_file)).to eq(hash_base_initial[:touched_file])
+    end
+  end
+
+  describe 'BaseFile protected methods' do
+    context 'when load_file_to_array_of_hash used' do
+      it 'return Array' do
+        expect(base_file.send(:load_file_to_array_of_hash).is_a?(Array)).to be(true)
+      end
+    end
+
+    context 'when clear_data used' do
+      it 'return true' do
+        expect(base_file.send(:clear_data)).to be(true)
+      end
+    end
+
+    context 'when write_file_line used' do
+      it 'raise if not two params used' do
+        expect { base_file.send(:write_file_line) }.to raise_error(ArgumentError)
+      end
+
+      it 'raise if not desc present' do
+        expect { base_file.send(:write_file_line, [1, 0, 0], nil) }.to raise_error('desc is not present')
+      end
+
+      it 'raise if not version present' do
+        expect { base_file.send(:write_file_line, nil, 'bla') }
+          .to raise_error('version is not Array with 3 number elements')
+      end
+
+      it 'raise if not version is array' do
+        expect { base_file.send(:write_file_line, '1.0.0', 'bla') }
+          .to raise_error('version is not Array with 3 number elements')
+      end
+
+      it 'raise if not version is array with == 3 elements' do
+        expect { base_file.send(:write_file_line, [1, 0], 'bla') }
+          .to raise_error('version is not Array with 3 number elements')
+      end
+
+      it 'raise if not version is array with == 3 elements numbers' do
+        expect { base_file.send(:write_file_line, [1, 0, '0'], 'bla') }
+          .to raise_error('version is not Array with 3 number elements')
+      end
+
+      it 'return true if version is Array with 3 number elements' do
+        expect(base_file.send(:write_file_line, [1, 0, 1], 'bla')).to be true
+      end
     end
   end
 end

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'sem_ver/description'
-require 'sem_ver/base_file'
+require 'sem_ver/file_yml_base'
+require 'sem_ver/file_yml'
 
 module SemVer
   class Error < StandardError; end
