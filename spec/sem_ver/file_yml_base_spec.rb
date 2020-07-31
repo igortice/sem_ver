@@ -72,7 +72,7 @@ RSpec.describe SemVer::FileYmlBase do
       it 'raise if name_folder not exists in directory' do
         name_folder = 'abc'
         expect { described_class.new(folder_file: name_folder) }
-          .to raise_error("folder_file #{name_folder} is not exists in directory")
+          .to raise_error("folder_file #{name_folder} is not exists in directory #{File.expand_path('.')}")
       end
     end
   end

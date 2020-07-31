@@ -19,7 +19,7 @@ module SemVer
       @initial_version = initial_version
       @folder_file     = folder_file
       @file            = name_file + '.yml'
-      @path_to_file    = File.join(Dir.pwd, folder_file, @file)
+      @path_to_file    = File.join(File.expand_path('.'), folder_file, @file)
       @touched_file    = touched_file
     end
 
@@ -60,8 +60,8 @@ module SemVer
         raise 'name_file is not String with value'
       end
 
-      return raise "folder_file #{folder_file} is not exists in directory" unless
-        Dir.children(File.join(Dir.pwd)).include?(folder_file)
+      return raise "folder_file #{folder_file} is not exists in directory #{File.expand_path('.')}" unless
+        Dir.children(File.expand_path('.')).include?(folder_file)
     end
 
     def validate_version_array(version)
