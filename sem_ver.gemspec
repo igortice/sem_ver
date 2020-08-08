@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.add_runtime_dependency 'colorize'
   spec.add_runtime_dependency 'tty-box'
+  spec.add_runtime_dependency 'tty-command'
   spec.add_runtime_dependency 'tty-prompt'
   spec.add_runtime_dependency 'tty-screen'
   spec.add_runtime_dependency 'tty-table'

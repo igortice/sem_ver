@@ -45,4 +45,8 @@ module SemVer
   def add_version_patch(desc)
     @sem_ver_file_yml.add_version_patch(desc)
   end
+
+  def path_file
+    @sem_ver_file_yml.path_to_file
+  end
 end

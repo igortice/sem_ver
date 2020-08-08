@@ -5,6 +5,8 @@ module SemVer
 
   # Class Base File
   class FileYml < SemVer::FileYmlBase
+    attr_accessor :path_to_file
+
     def load_versions
       data = load_file_to_array_of_hash
 

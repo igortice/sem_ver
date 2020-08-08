@@ -2,12 +2,13 @@
 
 Warning[:deprecated] = false
 namespace :sem_ver do
-  desc 'Make a js file that will have functions that will return restful routes/urls.'
+  desc 'Sem Ver terminal options'
   task :terminal do
     ####################################################################################################################
     # IMPORTS
     ####################################################################################################################
     require 'tty-box'
+    require 'tty-command'
     require 'tty-prompt'
     require 'tty-screen'
     require 'tty-table'
@@ -40,7 +41,6 @@ namespace :sem_ver do
     # PRINT MENU
     ####################################################################################################################
     prompt  = TTY::Prompt.new
-    result  = nil
     choices = [
       { name: 'ADD NEW VERSION', value: 1 },
       { name: 'CLEAR ALL VERSIONS', value: 2 },
@@ -62,10 +62,12 @@ namespace :sem_ver do
         break
       end
     end
-    # print TTY::Box.success(choices.select { |choice| choice[:value] == result }[0][:name], width: TTY::Screen.width)
   end
 
   def menu_choose_version_type
+    ####################################################################################################################
+    # PRINT MENU ADD VERSION
+    ####################################################################################################################
     prompt  = TTY::Prompt.new
     choices = [
       { name: 'MAJOR', value: 1 },
@@ -77,29 +79,61 @@ namespace :sem_ver do
       result = prompt.select('CHOOSE ADD VERSION TYPE:'.red, choices, enum: ')')
       break if result == 4
 
-      desc          = prompt.ask('WRITE ABOUT DESC VERSION:'.red) do |q|
+      ##################################################################################################################
+      # WRITE ABOUT DESC VERSION
+      ##################################################################################################################
+      desc = prompt.ask('WRITE ABOUT DESC VERSION:'.red) do |q|
         q.required true
-        q.modify :strip, :up
+        q.modify :strip
       end
+
+      ##################################################################################################################
+      # SHOW ABOUT NEXT VERSION
+      ##################################################################################################################
       header        = ['NUMBER VERSION', 'TYPE VERSION', 'DESC VERSION']
       type_selected = choices.select { |choice| choice[:value] == result }[0][:name]
       rows          = [[SemVer.next_version(type_selected.downcase.to_sym), type_selected, desc]]
-
-      table = TTY::Table.new header, rows
+      table         = TTY::Table.new header, rows
       print table.render :ascii, width: TTY::Screen.width, resize: true
+
+      ##################################################################################################################
+      # SAVE FILE?
+      ##################################################################################################################
       next unless prompt.yes?('SAVE?'.yellow)
 
       case result
       when 1
         SemVer.add_version_major(desc)
+        commit_and_push?
+
         break
       when 2
         SemVer.add_version_minor(desc)
+        commit_and_push?
+
         break
       when 3
         SemVer.add_version_patch(desc)
+        commit_and_push?
+
         break
       end
     end
+  end
+
+  def commit_and_push?
+    prompt = TTY::Prompt.new
+    cmd    = TTY::Command.new
+
+    return unless prompt.yes?('COMMIT AND PUSH FILE?'.yellow)
+
+    desc_commit = prompt.ask('MESSAGE COMMIT:'.red) do |q|
+      q.required true
+      q.modify :strip
+    end
+
+    cmd.run("git add #{SemVer.path_file} -f")
+    cmd.run("git commit -m '#{desc_commit}' #{SemVer.path_file}")
+    cmd.run('git push')
   end
 end

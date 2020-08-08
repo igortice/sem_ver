@@ -98,7 +98,7 @@ Metrics/ModuleLength:
     - 'spec/**/*.rb'
 
 Metrics/MethodLength:
-  Max: 20
+  Max: 40
 
 Metrics/AbcSize:
   Max: 30

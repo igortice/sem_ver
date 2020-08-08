@@ -56,5 +56,9 @@ RSpec.describe SemVer do
 
       expect(next_from_patch).to be(next_from_current)
     end
+
+    it 'path_file' do
+      expect(described_class.path_file).to include('public/semver.yml')
+    end
   end
 end
