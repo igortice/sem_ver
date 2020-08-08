@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    sem_ver (1.0.0)
+    sem_ver (0.1.0)
       colorize
       tty-box
       tty-prompt

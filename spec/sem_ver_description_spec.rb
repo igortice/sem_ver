@@ -6,8 +6,8 @@ RSpec.describe SemVer do
       expect(SemVer::NAME).to be 'sem_ver'
     end
 
-    it 'has version number: 1.0.0' do
-      expect(SemVer::VERSION).to be '1.0.0'
+    it 'has version number: 0.1.0' do
+      expect(SemVer::VERSION).to be '0.1.0'
     end
 
     it 'has author: Igor Rocha <igortice@gmail.com>' do

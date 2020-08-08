@@ -102,44 +102,44 @@ RSpec.describe SemVer::FileYml do
       expect(file_yml.clear_versions).to be(true)
     end
 
-    it '2) (add_version_major|add_version_minor|add_version_patch).number == "1.0.0"' do
-      expect(file_yml.add_version_minor(default_desc).number).to eq('1.0.0')
+    it '2) (add_version_major|add_version_minor|add_version_patch).number == "0.1.0"' do
+      expect(file_yml.add_version_minor(default_desc).number).to eq('0.1.0')
     end
 
-    it '3) add_version_major.number == "2.0.0"' do
+    it '3) add_version_major.number == "1.0.0"' do
+      expect(file_yml.add_version_major(default_desc).number).to eq('1.0.0')
+    end
+
+    it '4) add_version_minor.number == "1.1.0"' do
+      expect(file_yml.add_version_minor(default_desc).number).to eq('1.1.0')
+    end
+
+    it '5) add_version_minor.number == "1.2.0"' do
+      expect(file_yml.add_version_minor(default_desc).number).to eq('1.2.0')
+    end
+
+    it '5) add_version_minor.number == "1.3.0"' do
+      expect(file_yml.add_version_minor(default_desc).number).to eq('1.3.0')
+    end
+
+    it '6) add_version_patch.number == "1.3.1"' do
+      expect(file_yml.add_version_patch(default_desc).number).to eq('1.3.1')
+    end
+
+    it '7) add_version_patch.number == "1.3.2"' do
+      expect(file_yml.add_version_patch(default_desc).number).to eq('1.3.2')
+    end
+
+    it '8) add_version_minor.number == "1.4.0"' do
+      expect(file_yml.add_version_minor(default_desc).number).to eq('1.4.0')
+    end
+
+    it '9) add_version_major.number == "2.0.0"' do
       expect(file_yml.add_version_major(default_desc).number).to eq('2.0.0')
     end
 
-    it '4) add_version_minor.number == "2.1.0"' do
-      expect(file_yml.add_version_minor(default_desc).number).to eq('2.1.0')
-    end
-
-    it '5) add_version_minor.number == "2.2.0"' do
-      expect(file_yml.add_version_minor(default_desc).number).to eq('2.2.0')
-    end
-
-    it '5) add_version_minor.number == "2.3.0"' do
-      expect(file_yml.add_version_minor(default_desc).number).to eq('2.3.0')
-    end
-
-    it '6) add_version_patch.number == "2.3.1"' do
-      expect(file_yml.add_version_patch(default_desc).number).to eq('2.3.1')
-    end
-
-    it '7) add_version_patch.number == "2.3.2"' do
-      expect(file_yml.add_version_patch(default_desc).number).to eq('2.3.2')
-    end
-
-    it '8) add_version_minor.number == "2.4.0"' do
-      expect(file_yml.add_version_minor(default_desc).number).to eq('2.4.0')
-    end
-
-    it '9) add_version_major.number == "3.0.0"' do
-      expect(file_yml.add_version_major(default_desc).number).to eq('3.0.0')
-    end
-
-    it '10) add_version_patch.number == "3.0.1"' do
-      expect(file_yml.add_version_patch(default_desc).number).to eq('3.0.1')
+    it '10) add_version_patch.number == "2.0.1"' do
+      expect(file_yml.add_version_patch(default_desc).number).to eq('2.0.1')
     end
   end
 end

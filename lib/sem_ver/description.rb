@@ -2,7 +2,7 @@
 
 module SemVer
   NAME        = 'sem_ver'
-  VERSION     = '1.0.0'
+  VERSION     = '0.1.0'
   AUTHORS     = [{ name: 'Igor Rocha', email: 'igortice@gmail.com' }].freeze
   SUMMARY     = 'gem for rails based on semantic versioning saved in yml file.'
   DESCRIPTION = <<~DESC

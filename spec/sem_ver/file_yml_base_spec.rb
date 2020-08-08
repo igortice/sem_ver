@@ -5,7 +5,7 @@ RSpec.describe SemVer::FileYmlBase do
 
   let(:hash_base_initial) do
     {
-      initial_version: [1, 0, 0],
+      initial_version: [0, 1, 0],
       name_file:       'semver',
       folder_file:     'public',
       file:            'semver.yml',
@@ -15,7 +15,7 @@ RSpec.describe SemVer::FileYmlBase do
   end
 
   describe 'Default constants' do
-    it 'DEFAULT_INITIAL_VERSION = [1, 0, 0]' do
+    it 'DEFAULT_INITIAL_VERSION = [0, 1, 0]' do
       expect(described_class::DEFAULT_INITIAL_VERSION).to eq(hash_base_initial[:initial_version])
     end
 
@@ -36,7 +36,7 @@ RSpec.describe SemVer::FileYmlBase do
       end
 
       it 'raise if string' do
-        expect { described_class.new(initial_version: '1.0.0') }
+        expect { described_class.new(initial_version: '0.1.0') }
           .to raise_error('initial_version is not Array with 3 number elements')
       end
 
@@ -78,7 +78,7 @@ RSpec.describe SemVer::FileYmlBase do
   end
 
   describe 'Default instance variable' do
-    it '@initial_version=[1, 0, 0]' do
+    it '@initial_version=[0, 1, 0]' do
       expect(base_file.instance_variable_get(:@initial_version)).to eq(hash_base_initial[:initial_version])
     end
 
@@ -122,7 +122,7 @@ RSpec.describe SemVer::FileYmlBase do
       end
 
       it 'raise if not desc present' do
-        expect { base_file.send(:write_file_line, [1, 0, 0], nil) }.to raise_error('desc is not present')
+        expect { base_file.send(:write_file_line, [0, 1, 0], nil) }.to raise_error('desc is not present')
       end
 
       it 'raise if not version present' do
@@ -131,7 +131,7 @@ RSpec.describe SemVer::FileYmlBase do
       end
 
       it 'raise if not version is array' do
-        expect { base_file.send(:write_file_line, '1.0.0', 'bla') }
+        expect { base_file.send(:write_file_line, '0.1.0', 'bla') }
           .to raise_error('version is not Array with 3 number elements')
       end
 

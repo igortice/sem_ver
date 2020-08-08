@@ -25,15 +25,15 @@ RSpec.describe SemVer do
     end
 
     it 'add_version_major' do
-      expect(described_class.add_version_major(default_desc).number).to eq('1.0.0')
+      expect(described_class.add_version_major(default_desc).number).to eq('0.1.0')
     end
 
     it 'add_version_minor' do
-      expect(described_class.add_version_minor(default_desc).number).to eq('1.1.0')
+      expect(described_class.add_version_minor(default_desc).number).to eq('0.2.0')
     end
 
     it 'add_version_patch' do
-      expect(described_class.add_version_patch(default_desc).number).to eq('1.1.1')
+      expect(described_class.add_version_patch(default_desc).number).to eq('0.2.1')
     end
 
     it 'next_version(:major)' do

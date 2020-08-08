@@ -6,7 +6,7 @@ require 'yaml'
 module SemVer
   # Class Base File
   class FileYmlBase
-    DEFAULT_INITIAL_VERSION = [1, 0, 0].freeze
+    DEFAULT_INITIAL_VERSION = [0, 1, 0].freeze
     DEFAULT_NAME_FILE       = 'semver'
     DEFAULT_FOLDER_FILE     = 'public'
 
