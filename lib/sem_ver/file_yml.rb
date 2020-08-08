@@ -43,27 +43,29 @@ module SemVer
       add_version(type: :patch, desc: desc)
     end
 
+    def next_version(type)
+      if current_version.present?
+        version_array = current_version.number.split('.').map(&:to_i)
+        case type
+        when :major
+          [version_array[0].next, 0, 0]
+        when :minor
+          [version_array[0], version_array[1].next, 0]
+        when :patch
+          [version_array[0], version_array[1], version_array[2].next]
+        end
+      else
+        @initial_version
+      end
+    end
+
     private
 
     def add_version(type: nil, desc: nil)
       raise 'type is not symbol (:major|:minor|:patch)' unless %i[major minor patch].include?(type)
       raise 'desc is not defined' unless desc.present?
 
-      version =
-        if current_version.present?
-          version_array = current_version.number.split('.').map(&:to_i)
-          case type
-          when :major
-            [version_array[0].next, 0, 0]
-          when :minor
-            [version_array[0], version_array[1].next, 0]
-          when :patch
-            [version_array[0], version_array[1], version_array[2].next]
-          end
-        else
-          @initial_version
-        end
-      add_version_to_file(version, desc)
+      add_version_to_file(next_version(type), desc)
     end
 
     def add_version_to_file(version = nil, desc = nil)

@@ -35,5 +35,26 @@ RSpec.describe SemVer do
     it 'add_version_patch' do
       expect(described_class.add_version_patch(default_desc).number).to eq('1.1.1')
     end
+
+    it 'next_version(:major)' do
+      next_from_major   = described_class.next_version(:major).split('.')[0].to_i
+      next_from_current = described_class.current_version.number.split('.')[0].to_i + 1
+
+      expect(next_from_major).to be(next_from_current)
+    end
+
+    it 'next_version(:minor)' do
+      next_from_minor   = described_class.next_version(:minor).split('.')[1].to_i
+      next_from_current = described_class.current_version.number.split('.')[1].to_i + 1
+
+      expect(next_from_minor).to be(next_from_current)
+    end
+
+    it 'next_version(:patch)' do
+      next_from_patch   = described_class.next_version(:patch).split('.')[2].to_i
+      next_from_current = described_class.current_version.number.split('.')[2].to_i + 1
+
+      expect(next_from_patch).to be(next_from_current)
+    end
   end
 end

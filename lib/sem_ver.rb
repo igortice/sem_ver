@@ -30,6 +30,10 @@ module SemVer
     @sem_ver_file_yml.current_version
   end
 
+  def next_version(type)
+    @sem_ver_file_yml.next_version(type).join('.')
+  end
+
   def add_version_major(desc)
     @sem_ver_file_yml.add_version_major(desc)
   end
